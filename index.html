@@ -3,207 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Next Show Pro | Global Cinema Ticketing</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <title>Next Show | The Avengers Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;800&family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
         :root {
-            --accent: #ff003c;
-            --bg: #08080b;
-            --card-bg: #121217;
-            --text: #ffffff;
-            --muted: #88888b;
+            --mcu-blue: #00d2ff;
+            --mcu-red: #f0131e;
+            --bg-dark: #050608;
+            --card-gray: #111218;
+            --gold: #d4af37;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
-        body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Outfit', sans-serif; background: var(--bg-dark); color: white; scroll-behavior: smooth; }
 
         /* Navigation */
         nav {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 5%; background: rgba(8, 8, 11, 0.95);
-            position: fixed; width: 100%; top: 0; z-index: 1000; border-bottom: 1px solid #1f1f23;
+            padding: 20px 8%; background: rgba(5, 6, 8, 0.9);
+            position: fixed; width: 100%; top: 0; z-index: 2000; border-bottom: 1px solid #222;
         }
-        .logo { font-family: 'Bebas Neue', cursive; font-size: 2.5rem; color: var(--accent); letter-spacing: 2px; }
-        .nav-links a { color: white; text-decoration: none; margin-left: 30px; font-weight: 500; font-size: 0.9rem; transition: 0.3s; }
-        .nav-links a:hover { color: var(--accent); }
+        .logo { font-family: 'Bebas Neue'; font-size: 2.5rem; color: var(--mcu-red); }
+        .nav-links a { color: #ccc; text-decoration: none; margin-left: 25px; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; }
 
-        /* Hero Carousel (Static for Code) */
+        /* Hero - Avengers Doomsday Focus */
         .hero {
             height: 90vh;
-            background: linear-gradient(to bottom, rgba(8,8,11,0.2), var(--bg)),
-                        url('https://images.unsplash.com/photo-1440404653325-ab127d49abc1?auto=format&fit=crop&q=80&w=1600');
+            background: linear-gradient(to right, rgba(0,0,0,0.8), transparent),
+                        url('https://images.unsplash.com/photo-1635805737707-575885ab0820?auto=format&fit=crop&q=80&w=1600');
             background-size: cover; background-position: center;
-            display: flex; align-items: flex-end; padding: 0 5% 100px;
+            display: flex; align-items: center; padding: 0 8%;
         }
-        .hero-text h1 { font-family: 'Bebas Neue', cursive; font-size: 8rem; line-height: 0.9; margin-bottom: 20px; }
-        .hero-text p { font-size: 1.2rem; color: var(--muted); max-width: 600px; margin-bottom: 30px; }
+        .hero-content { max-width: 700px; }
+        .hero-content h1 { font-family: 'Bebas Neue'; font-size: 7rem; line-height: 1; color: #fff; margin-bottom: 15px; }
+        .hero-content p { font-size: 1.2rem; color: #bbb; margin-bottom: 30px; border-left: 4px solid var(--mcu-red); padding-left: 20px; }
 
-        /* General Layout */
-        .container { padding: 80px 5%; }
-        h2 { font-family: 'Bebas Neue', cursive; font-size: 3rem; margin-bottom: 40px; letter-spacing: 1px; }
+        /* Section Styling */
+        .container { padding: 80px 8%; }
+        h2 { font-family: 'Bebas Neue'; font-size: 3.5rem; margin-bottom: 40px; letter-spacing: 2px; }
+        h2 span { color: var(--mcu-red); }
 
-        /* Movie Slider (Horizontal Scroll) */
-        .movie-scroller {
-            display: flex; overflow-x: auto; gap: 25px; padding-bottom: 20px;
-            scrollbar-width: none; /* Hide scrollbar for clean look */
+        /* Avengers Collection Grid */
+        .avengers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
         }
-        .movie-scroller::-webkit-scrollbar { display: none; }
-
         .movie-card {
-            flex: 0 0 280px; background: var(--card-bg); border-radius: 12px;
-            overflow: hidden; transition: 0.4s; position: relative;
+            background: var(--card-gray); border-radius: 15px; overflow: hidden;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid #333; position: relative;
         }
-        .movie-card:hover { transform: scale(1.05); }
+        .movie-card:hover { transform: translateY(-15px); border-color: var(--mcu-blue); box-shadow: 0 10px 30px rgba(0, 210, 255, 0.2); }
         .movie-card img { width: 100%; height: 400px; object-fit: cover; }
-        .movie-details { padding: 15px; }
-        .rating { color: #ffc107; font-weight: bold; margin-bottom: 5px; }
+        .movie-info { padding: 20px; }
+        .movie-info h3 { margin-bottom: 10px; font-size: 1.4rem; }
+        .badge { background: #333; padding: 4px 10px; border-radius: 4px; font-size: 0.7rem; color: var(--mcu-blue); margin-right: 5px; }
 
-        /* Ticket Pricing & Tiers */
-        .tier-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .tier-card {
-            background: linear-gradient(145deg, #121217, #1a1a23);
-            padding: 40px; border-radius: 20px; text-align: center; border: 1px solid #25252b;
-        }
-        .tier-card.pro { border-color: var(--accent); box-shadow: 0 0 20px rgba(255, 0, 60, 0.2); }
-        .price { font-size: 3.5rem; font-weight: 700; margin: 20px 0; font-family: 'Bebas Neue'; }
-        .features { list-style: none; color: var(--muted); margin-bottom: 30px; }
-        .features li { margin: 12px 0; }
+        /* Theater Experience Section */
+        .experience { background: #0a0b10; border-radius: 30px; display: flex; align-items: center; gap: 50px; padding: 60px; margin-top: 50px; }
+        .exp-text { flex: 1; }
+        .exp-visual { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .exp-box { background: #1a1c24; padding: 20px; border-radius: 15px; text-align: center; border: 1px solid #333; }
+        .exp-box h4 { color: var(--gold); margin-bottom: 10px; }
 
-        /* Buttons */
+        /* CTA Button */
         .btn {
-            background: var(--accent); color: white; padding: 15px 35px;
-            border: none; border-radius: 5px; font-weight: bold; cursor: pointer;
-            text-decoration: none; display: inline-block; transition: 0.3s;
+            background: var(--mcu-red); color: white; padding: 18px 40px;
+            text-decoration: none; border-radius: 5px; font-weight: 800;
+            display: inline-block; transition: 0.3s; text-transform: uppercase;
         }
-        .btn:hover { background: #d00031; box-shadow: 0 0 15px var(--accent); }
+        .btn:hover { letter-spacing: 2px; background: white; color: var(--mcu-red); }
 
-        /* Search Section */
-        .search-bar {
-            width: 100%; background: var(--card-bg); border: 1px solid #333;
-            padding: 20px 30px; border-radius: 50px; font-size: 1.1rem; color: white;
-            margin-bottom: 60px;
-        }
-
-        footer { padding: 50px 5%; background: #050507; border-top: 1px solid #1f1f23; text-align: center; color: var(--muted); }
+        /* Footer */
+        footer { padding: 80px 8%; background: #020203; text-align: center; border-top: 1px solid #111; }
+        .socials { margin: 30px 0; font-size: 1.5rem; color: #555; }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">NEXT SHOW.</div>
+        <div class="logo">NEXT SHOW<span>.</span></div>
         <div class="nav-links">
-            <a href="#movies">Now Showing</a>
-            <a href="#coming-soon">Coming Soon</a>
-            <a href="#membership">Membership</a>
-            <a href="#" class="btn" style="padding: 10px 25px; margin-left: 30px;">Get App</a>
+            <a href="#avengers">MCU Marathon</a>
+            <a href="#experience">Experiences</a>
+            <a href="#booking">Showtimes</a>
+            <a href="#" class="btn" style="padding: 10px 20px;">Sign Up</a>
         </div>
     </nav>
 
-    <section class="hero">
-        <div class="hero-text">
-            <p>STREAMING IN IMAX 3D</p>
-            <h1>AVATAR: FIRE AND ASH</h1>
-            <p>Journey back to Pandora. Tickets available for pre-booking worldwide starting December 2025.</p>
-            <a href="#movies" class="btn">Explore Tickets</a>
+    <header class="hero">
+        <div class="hero-content">
+            <p>PHASE 6 REVEALED</p>
+            <h1>AVENGERS:<br>SECRET WARS</h1>
+            <p>The multiverse collapses. Every hero from every timeline returns for the final stand. Pre-booking opens in 120 days.</p>
+            <a href="#avengers" class="btn">View All MCU Movies</a>
         </div>
-    </section>
+    </header>
 
-    <div class="container" id="movies">
-        <input type="text" class="search-bar" placeholder="Search for movies, actors, or genres...">
-        
-        <h2>Now Showing in Cinemas</h2>
-        <div class="movie-scroller">
+    <section class="container" id="avengers">
+        <h2>The <span>Avengers</span> Collection</h2>
+        <div class="avengers-grid">
             <!-- Movie 1 -->
             <div class="movie-card">
-                <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&q=80&w=600" alt="Gladiator">
-                <div class="movie-details">
-                    <p class="rating">9.1 / 10</p>
-                    <h3>Gladiator II</h3>
-                    <p style="font-size: 0.8rem; color: var(--muted);">Action / Drama • 2h 28m</p>
+                <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&q=80&w=600" alt="Iron Man">
+                <div class="movie-info">
+                    <div><span class="badge">Classic</span><span class="badge">4K</span></div>
+                    <h3>The Avengers (2012)</h3>
+                    <p style="color:#888; font-size: 0.9rem;">Earth's Mightiest Heroes assemble for the first time.</p>
                 </div>
             </div>
             <!-- Movie 2 -->
             <div class="movie-card">
-                <img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?auto=format&fit=crop&q=80&w=600" alt="The Batman">
-                <div class="movie-details">
-                    <p class="rating">8.8 / 10</p>
-                    <h3>The Batman: Part II</h3>
-                    <p style="font-size: 0.8rem; color: var(--muted);">Crime / Mystery • 2h 55m</p>
+                <img src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?auto=format&fit=crop&q=80&w=600" alt="Endgame">
+                <div class="movie-info">
+                    <div><span class="badge">Popular</span><span class="badge">IMAX</span></div>
+                    <h3>Avengers: Endgame</h3>
+                    <p style="color:#888; font-size: 0.9rem;">The epic conclusion to the Infinity Saga.</p>
                 </div>
             </div>
             <!-- Movie 3 -->
             <div class="movie-card">
-                <img src="https://images.unsplash.com/photo-1509248961158-e54f6934749c?auto=format&fit=crop&q=80&w=600" alt="Joker">
-                <div class="movie-details">
-                    <p class="rating">7.5 / 10</p>
-                    <h3>Joker: Folie à Deux</h3>
-                    <p style="font-size: 0.8rem; color: var(--muted);">Musical / Drama • 2h 18m</p>
+                <img src="https://images.unsplash.com/photo-1608889175123-8ee362201f81?auto=format&fit=crop&q=80&w=600" alt="Spider-man">
+                <div class="movie-info">
+                    <div><span class="badge">Multiverse</span><span class="badge">3D</span></div>
+                    <h3>Spider-Man: No Way Home</h3>
+                    <p style="color:#888; font-size: 0.9rem;">Three generations of Spider-Men unite.</p>
                 </div>
             </div>
             <!-- Movie 4 -->
             <div class="movie-card">
-                <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?auto=format&fit=crop&q=80&w=600" alt="Inception">
-                <div class="movie-details">
-                    <p class="rating">8.5 / 10</p>
-                    <h3>Interstellar: Re-Release</h3>
-                    <p style="font-size: 0.8rem; color: var(--muted);">Sci-Fi / Adventure • 2h 49m</p>
+                <img src="https://images.unsplash.com/photo-1634827375831-a4511bc5415a?auto=format&fit=crop&q=80&w=600" alt="Doctor Strange">
+                <div class="movie-info">
+                    <div><span class="badge">Trending</span><span class="badge">4DX</span></div>
+                    <h3>Avengers: Doomsday (2026)</h3>
+                    <p style="color:var(--mcu-red); font-weight: bold;">PRE-BOOKING SOON</p>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <section class="container" id="membership" style="background: #0a0a0e;">
-        <h2 style="text-align: center;">Choose Your Movie Plan</h2>
-        <div class="tier-grid">
-            <div class="tier-card">
-                <h3>Standard</h3>
-                <div class="price">$12<span>/mo</span></div>
-                <ul class="features">
-                    <li>2 Standard Tickets/mo</li>
-                    <li>No Convenience Fees</li>
-                    <li>Free Small Popcorn</li>
-                </ul>
-                <a href="#" class="btn" style="background: transparent; border: 1px solid white;">Join Now</a>
-            </div>
-            <div class="tier-card pro">
-                <div style="color: var(--accent); font-weight: bold; margin-bottom: 10px;">MOST POPULAR</div>
-                <h3>Unlimited Pro</h3>
-                <div class="price">$25<span>/mo</span></div>
-                <ul class="features">
-                    <li>Unlimited Standard Tickets</li>
-                    <li>50% Off IMAX & 3D</li>
-                    <li>Weekly Free Combos</li>
-                    <li>Priority Seat Selection</li>
-                </ul>
-                <a href="#" class="btn">Start Free Trial</a>
             </div>
         </div>
     </section>
 
-    <div class="container" id="coming-soon">
-        <h2>Coming Soon (2025-2026)</h2>
-        <div class="movie-scroller">
-            <div class="movie-card" style="opacity: 0.6;">
-                <img src="https://images.unsplash.com/photo-1620121692029-d088224ddc74?auto=format&fit=crop&q=80&w=600" alt="Spiderman">
-                <div class="movie-details">
-                    <h3>Spider-Man 4</h3>
-                    <p>JULY 2026</p>
-                </div>
+    <section class="container" id="experience">
+        <div class="experience">
+            <div class="exp-text">
+                <h2>Choose Your <span>Format</span></h2>
+                <p style="color:#888; margin-bottom: 30px;">Don't just watch the movie, live it. We offer the world's most advanced cinema technologies for the ultimate Avengers experience.</p>
+                <a href="#" class="btn" style="background: transparent; border: 2px solid white;">Learn More</a>
             </div>
-            <div class="movie-card" style="opacity: 0.6;">
-                <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&q=80&w=600" alt="Avengers">
-                <div class="movie-details">
-                    <h3>Avengers: Doomsday</h3>
-                    <p>MAY 2026</p>
+            <div class="exp-visual">
+                <div class="exp-box">
+                    <h4>IMAX</h4>
+                    <p style="font-size: 0.8rem;">26% more picture</p>
+                </div>
+                <div class="exp-box">
+                    <h4>4DX</h4>
+                    <p style="font-size: 0.8rem;">Motion & Effects</p>
+                </div>
+                <div class="exp-box" style="border-color: var(--mcu-blue);">
+                    <h4>DOLBY</h4>
+                    <p style="font-size: 0.8rem;">Immersive Audio</p>
+                </div>
+                <div class="exp-box">
+                    <h4>VIP</h4>
+                    <p style="font-size: 0.8rem;">Luxury Dining</p>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+
+    <section class="container" style="text-align: center;">
+        <h2 style="font-size: 5rem;">JOIN THE <span>ASSEMBLED</span></h2>
+        <p style="color: #666; margin-bottom: 40px;">Get exclusive access to midnight premieres and fan-only merchandise.</p>
+        <a href="#" class="btn">Register For Fan-Pass</a>
+    </section>
 
     <footer>
-        <h2 class="logo">NEXT SHOW.</h2>
-        <p>1,200+ Screens | 45 Countries | 1 Ultimate Experience</p>
-        <p style="margin-top: 20px; font-size: 0.8rem;">&copy; 2026 Movie Group Project. All movie titles and images are for educational demo purposes.</p>
+        <div class="logo" style="color: white;">NEXT SHOW<span style="color: var(--mcu-red);">.</span></div>
+        <p style="margin-top: 20px; font-size: 0.9rem; color: #444;">Marvel, Avengers, and all related titles are trademarks of Marvel Studios & Disney.</p>
+        <div class="socials">
+            FB / TW / IG / YT
+        </div>
+        <p style="font-size: 0.7rem; opacity: 0.4;">&copy; 2026 Next Show Global Ticketing Systems.</p>
     </footer>
 
 </body>
