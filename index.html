@@ -1,1 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next Show | Book Your Movie Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #e50914; /* Cinema Red */
+            --dark: #0f1014;
+            --surface: #1a1c23;
+            --text-main: #ffffff;
+            --text-dim: #a0a0a0;
+            --gold: #ffc107;
+        }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* --- Navigation --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: rgba(15, 16, 20, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .logo span { color: white; }
+
+        .nav-links { display: flex; list-style: none; }
+        .nav-links li { margin-left: 30px; }
+        .nav-links a { text-decoration: none; color: white; font-size: 0.9rem; font-weight: 400; }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 70vh;
+            background: linear-gradient(to right, rgba(15,16,20,0.9), rgba(15,16,20,0.2)),
+                        url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&q=80&w=1600');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            padding: 0 8%;
+        }
+
+        .hero-content h1 { font-size: 4rem; font-family: 'Oswald', sans-serif; margin-bottom: 10px; }
+        .hero-content p { color: var(--text-dim); max-width: 500px; margin-bottom: 25px; }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 700;
+            display: inline-block;
+            transition: 0.3s;
+        }
+        .btn:hover { transform: scale(1.05); background: #f40a16; }
+
+        /* --- Movie Grid --- */
+        .section-padding { padding: 60px 8%; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .movie-card {
+            background: var(--surface);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: 0.3s;
+            cursor: pointer;
+            border: 1px solid #333;
+        }
+        .movie-card:hover { border-color: var(--primary); transform: translateY(-5px); }
+
+        .poster {
+            height: 320px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .movie-info { padding: 15px; }
+        .movie-info h3 { font-size: 1.1rem; margin-bottom: 5px; }
+        .tag { font-size: 0.7rem; color: var(--text-dim); border: 1px solid #444; padding: 2px 6px; border-radius: 3px; }
+
+        /* --- Offers & Pricing --- */
+        .pricing-section { background: var(--surface); }
+        .pricing-table {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .price-card {
+            background: var(--dark);
+            padding: 30px;
+            border-radius: 12px;
+            width: 300px;
+            text-align: center;
+            border: 1px solid #333;
+        }
+
+        .price-card.featured { border: 2px solid var(--gold); }
+        .price-card h4 { color: var(--gold); margin-bottom: 15px; text-transform: uppercase; }
+        .amount { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
+        .amount span { font-size: 1rem; color: var(--text-dim); }
+
+        .offer-badge {
+            background: #2ecc71;
+            font-size: 0.8rem;
+            padding: 5px 10px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        /* --- Footer --- */
+        footer { padding: 40px 8%; border-top: 1px solid #333; text-align: center; color: var(--text-dim); font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">NEXT<span>SHOW</span></div>
+        <ul class="nav-links">
+            <li><a href="#">Movies</a></li>
+            <li><a href="#">Cinemas</a></li>
+            <li><a href="#">Offers</a></li>
+            <li><a href="#" class="btn" style="padding: 8px 20px;">Login</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <span class="offer-badge" style="background: var(--primary);">Now Showing</span>
+            <h1>GLADIATOR II</h1>
+            <p>The epic saga of power, intrigue, and vengeance set in Ancient Rome continues.</p>
+            <a href="#movies" class="btn">Book Now</a>
+        </div>
+    </header>
+
+    <section class="section-padding" id="movies">
+        <h2>Trending Movies</h2>
+        <div class="grid">
+            <!-- Movie 1 -->
+            <div class="movie-card">
+                <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?auto=format&fit=crop&q=80&w=600" alt="Action" class="poster">
+                <div class="movie-info">
+                    <span class="tag">Sci-Fi / Action</span>
+                    <h3>Cyber Drift</h3>
+                    <p style="color:var(--gold)">★ 8.9</p>
+                </div>
+            </div>
+            <!-- Movie 2 -->
+            <div class="movie-card">
+                <img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?auto=format&fit=crop&q=80&w=600" alt="Horror" class="poster">
+                <div class="movie-info">
+                    <span class="tag">Horror / Thriller</span>
+                    <h3>The Silent Room</h3>
+                    <p style="color:var(--gold)">★ 7.5</p>
+                </div>
+            </div>
+            <!-- Movie 3 -->
+            <div class="movie-card">
+                <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&q=80&w=600" alt="Classic" class="poster">
+                <div class="movie-info">
+                    <span class="tag">Animation / Family</span>
+                    <h3>Cloudy Days</h3>
+                    <p style="color:var(--gold)">★ 9.2</p>
+                </div>
+            </div>
+            <!-- Movie 4 -->
+            <div class="movie-card">
+                <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&q=80&w=600" alt="Adventure" class="poster">
+                <div class="movie-info">
+                    <span class="tag">Adventure</span>
+                    <h3>Peak of No Return</h3>
+                    <p style="color:var(--gold)">★ 8.2</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding pricing-section">
+        <h2 style="text-align: center;">Ticket Pricing & Offers</h2>
+        <div class="pricing-table">
+            
+            <div class="price-card">
+                <h4>Matinee Special</h4>
+                <div class="offer-badge">30% OFF</div>
+                <div class="amount">$8.50<span>/seat</span></div>
+                <p style="font-size: 0.8rem; color: var(--text-dim);">Valid for shows before 4:00 PM (Mon-Thu)</p>
+            </div>
+
+            <div class="price-card featured">
+                <h4>Gold Class</h4>
+                <div class="offer-badge" style="background:var(--gold); color:black;">BEST SELLER</div>
+                <div class="amount">$18.00<span>/seat</span></div>
+                <p style="font-size: 0.8rem; color: var(--text-dim);">Recliner seats, Butler service & Popcorn refill</p>
+            </div>
+
+            <div class="price-card">
+                <h4>Weekend Blockbuster</h4>
+                <div class="offer-badge">Buy 2 Get 1</div>
+                <div class="amount">$14.00<span>/seat</span></div>
+                <p style="font-size: 0.8rem; color: var(--text-dim);">Applicable on Fri, Sat & Sun for 2D/3D</p>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>Next Show Ticketing Platform &copy; 2026</p>
+        <p style="font-size: 0.7rem; margin-top: 10px;">Partnered with IMAX, Dolby Atmos, and Major Studios</p>
+    </footer>
+
+</body>
+</html>
